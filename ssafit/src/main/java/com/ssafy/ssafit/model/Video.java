@@ -28,6 +28,9 @@ public class Video {
 		this.createAt = this.updatedAt =  LocalDateTime.now();
 	}
 
+	//////////////////////////////////////////////////
+	// getter setters
+	
 //	public String getId() {
 //		return id;
 //	}
@@ -100,6 +103,12 @@ public class Video {
 		this.updatedAt = updatedAt;
 	}
 	
-	
-	
+	///////////////////////////////////////////////////////////////
+	// methods
+	@Override
+	public String toString() {
+		return "Video [id=" + id + ", title=" + title + ", channelName=" + channelName + ", author=" + author
+				+ ", part=" + part + ", url=" + url + ", length=" + length + ", createAt=" + createAt + ", updatedAt="
+				+ updatedAt + "]";
+	}
 }
