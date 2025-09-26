@@ -14,8 +14,10 @@ public class Video {
 	private String url;				// 유튜브 영상 링크
 	private int length;				// 영상 길이 (초)
 	
-	private LocalDateTime createAt;		
-	private LocalDateTime updatedAt;
+	private LocalDateTime createAt;	// 생성 시간	
+	private LocalDateTime updatedAt;// 수정 시간
+	
+	private int viewCount;			// 조회수
 	
 	public Video(String title, String channelName, String author, String part, String url, int length) {
 		this.id = IdGenerator.newId();
@@ -25,7 +27,10 @@ public class Video {
 		this.part = part;
 		this.url = url;
 		this.length = length;
+		
 		this.createAt = this.updatedAt =  LocalDateTime.now();
+		
+		this.viewCount = 0;
 	}
 
 	//////////////////////////////////////////////////
@@ -103,6 +108,15 @@ public class Video {
 		this.updatedAt = updatedAt;
 	}
 	
+	
+	public int getViewCount() {
+		return viewCount;
+	}
+
+	public void setViewCount(int viewCount) {
+		this.viewCount = viewCount;
+	}
+
 	///////////////////////////////////////////////////////////////
 	// methods
 	@Override
