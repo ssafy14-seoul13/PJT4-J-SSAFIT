@@ -1,24 +1,45 @@
-# Compiled class file
-*.class
+# --- OS 공통 ---
+.DS_Store
+Thumbs.db
 
+# --- Server ---
+**/Servers/
 
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
+# --- Maven/빌드 산출물 ---
+**/target/
+**/out/
+**/bin/
+**/surefire-reports/
+**/failsafe-reports/
+**/site/
+**/jacoco.exec
 
-# Sts4
-.project
-/.metadata/
-.settings/
+# --- IDE/툴 ---
+# Eclipse / STS4
+**/.project
+**/.classpath
+**/.settings/
+**/.factorypath
+**/.apt_generated/
+**/.externalToolBuilders/
+**/.recommenders/
+**/.springBeans
+**/.sts4-cache/
+**/.metadata/
 
-# build
-bin/
-target/
+# IntelliJ
+**/.idea/
+**/*.iml
+**/*.ipr
+**/*.iws
 
-# server
-Servers/
+# VS Code
+**/.vscode/
+
+# --- 로그/임시 ---
+**/logs/
+**/*.log
+**/*.tmp
+**/~$*
+**/*.swp
+**/*.swo
