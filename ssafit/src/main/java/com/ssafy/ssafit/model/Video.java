@@ -14,13 +14,13 @@ public class Video {
 	private String url;				// 유튜브 영상 링크
 	private int length;				// 영상 길이 (초)
 	
-	private LocalDateTime createAt;	// 생성 시간	
+	private LocalDateTime createdAt;	// 생성 시간	
 	private LocalDateTime updatedAt;// 수정 시간
 	
 	private int viewCount;			// 조회수
-	
-	public Video(String title, String channelName, String author, String part, String url, int length) {
-		this.id = IdGenerator.newId();
+
+	public Video(String id, String title, String channelName, String author, String part, String url, int length, LocalDateTime createdAt) {
+		this.id = id;
 		this.title = title;
 		this.channelName = channelName;
 		this.author = author;
@@ -28,7 +28,7 @@ public class Video {
 		this.url = url;
 		this.length = length;
 		
-		this.createAt = this.updatedAt =  LocalDateTime.now();
+		this.createdAt = this.updatedAt = createdAt;
 		
 		this.viewCount = 0;
 	}
@@ -40,9 +40,9 @@ public class Video {
 		return id;
 	}
 
-//	public void setId(String id) {
-//		this.id = id;
-//	}
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public String getTitle() {
 		return title;
@@ -93,12 +93,12 @@ public class Video {
 	}
 
 	public LocalDateTime getCreateAt() {
-		return createAt;
+		return createdAt;
 	}
 
-//	public void setCreateAt(LocalDateTime createAt) {
-//		this.createAt = createAt;
-//	}
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
 
 	public LocalDateTime getUpdatedAt() {
 		return updatedAt;
@@ -122,7 +122,7 @@ public class Video {
 	@Override
 	public String toString() {
 		return "Video [id=" + id + ", title=" + title + ", channelName=" + channelName + ", author=" + author
-				+ ", part=" + part + ", url=" + url + ", length=" + length + ", createAt=" + createAt + ", updatedAt="
+				+ ", part=" + part + ", url=" + url + ", length=" + length + ", createAt=" + createdAt + ", updatedAt="
 				+ updatedAt + "]";
 	}
 }
