@@ -8,34 +8,32 @@ import com.ssafy.ssafit.service.user.UserService;
 import com.ssafy.ssafit.service.user.UserServiceImpl;
 
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/user")
-public class UserController extends HttpServlet{
+public class UserController {
 	private final UserService userService = new UserServiceImpl(new UserRepositoryImpl());
 	
 	public UserController() {
 		super();
 	}
 	
-	@Override
-	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
 		HttpSession session = request.getSession();
-		
+		System.out.println("똥");
 		switch (action) {
 			// 1. 로그인 폼 페이지 열기
 			case "loginForm" :
+				System.out.println("똥2");
 				// 1-a. 로그인한 사용자일 경우 -> 마이페이지
 				if (session.getAttribute("loggedInUser") != null) {
 					response.sendRedirect("user?action=mypage");
 				// 1-b. 로그인 안한 사용자일 경우 -> 로그인페이지
 				} else {
-					request.getRequestDispatcher("WEB-INF/user/login.jsp").forward(request, response);
+					request.getRequestDispatcher("/WEB-INF/user/login.jsp").forward(request, response);
+					System.out.println("똥5");
 				}
 		        break;
 		    // 2. 로그인 폼 제출
@@ -50,7 +48,7 @@ public class UserController extends HttpServlet{
 					response.sendRedirect("./");
 				} else {
 					request.setAttribute("error", "아이디 또는 비밀번호가 틀립니다.");
-					request.getRequestDispatcher("WEB-INF/user/login.jsp").forward(request, response);
+					request.getRequestDispatcher("/WEB-INF/user/login.jsp").forward(request, response);
 				}
 				break;
 			// 3. 회원가입 폼 페이지 열기
@@ -60,7 +58,7 @@ public class UserController extends HttpServlet{
 					response.sendRedirect("user?action=mypage");
 				// 3-b. 로그인 안한 사용자일 경우 -> 회원가입 페이지
 				} else {
-					request.getRequestDispatcher("WEB-INF/user/register.jsp").forward(request, response);
+					request.getRequestDispatcher("/WEB-INF/user/register.jsp").forward(request, response);
 				}
 		        break;
 		    // 4. 회원가입 폼 제출
@@ -78,17 +76,17 @@ public class UserController extends HttpServlet{
 				} else {
 					request.setAttribute("error", "이미 가입했거나, 아이디, 비밀번호가 잘못되었습니다.");
 				}
-				request.getRequestDispatcher("WEB-INF/user/register.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/user/register.jsp").forward(request, response);
 				break;
 			// 5. 마이페이지 폼 열기
 			case "mypage" :
 				User user2 = (User) session.getAttribute("loggedInUser");
 				// 5-a. 로그인 안 했을 경우 -> 로그인 폼
 				if (user2 == null) {
-					request.getRequestDispatcher("WEB-INF/user/login.jsp").forward(request, response);
+					request.getRequestDispatcher("/WEB-INF/user/login.jsp").forward(request, response);
 				// 5-b. 로그인 했을 경우 -> 회원가입 폼
 				} else {
-					request.getRequestDispatcher("WEB-INF/user/mypage.jsp").forward(request, response);
+					request.getRequestDispatcher("/WEB-INF/user/mypage.jsp").forward(request, response);
 				}
 				break;
 			// 6. 마이페이지 내 정보 수정 폼 제출
@@ -133,7 +131,7 @@ public class UserController extends HttpServlet{
 					request.setAttribute("error", "회원정보 수정에 실패했습니다.");
 				}
 				
-				request.getRequestDispatcher("WEB-INF/user/mypage.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/user/mypage.jsp").forward(request, response);
 				break;
 			// 7. 로그아웃
 			case "logout" :				
@@ -153,9 +151,11 @@ public class UserController extends HttpServlet{
 		                session.invalidate();
 		            }
 		        }
-		        // 4. 삭제 후 홈페이지로 리디렉션
 		        response.sendRedirect("./");
 		        break;
+		    default :
+		    	response.sendRedirect("./");
+		    	break;
 		}
 	}
 }

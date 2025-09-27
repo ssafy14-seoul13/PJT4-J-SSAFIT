@@ -39,6 +39,7 @@
 	</form>
 	<hr>
 	<a href="user?action=logout">😥 로그아웃</a>
-	<a href="user?action=delete" style="color:red">🥵 회원탈퇴</a>
+	<a href="user?action=delete" style="color:red">🥵 회원탈퇴</a> <br>
+	<a href="./">메인으로 →</a>
 </body>
 </html>
