@@ -122,7 +122,7 @@ public class VideoController extends HttpServlet {
 		}
 
 		request.setAttribute("video", video);
-		request.getRequestDispatcher("/WEB-INF/video/datail.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/video/detail.jsp").forward(request, response);
 
 	}
 
@@ -156,7 +156,7 @@ public class VideoController extends HttpServlet {
 		}
 
 		request.setAttribute("video", video);
-		request.getRequestDispatcher("/WEB-INF/video/datail.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/video/detail.jsp").forward(request, response);
 
 	}
 
