@@ -44,6 +44,15 @@ public class VideoController extends HttpServlet {
 		case "search":
 			handleSearch(request, response);
 			break;
+			
+		case "createForm":
+			request.getRequestDispatcher("/WEB-INF/video/create.jsp").forward(request, response);
+			break;
+			
+		case "updateForm":
+			// TODO 권한 있는 사용자여야 페이지 받도록
+		    request.getRequestDispatcher("/WEB-INF/video/update.jsp").forward(request, response);
+		    break;
 
 		default:
 			System.out.println("Error! : wrong request from client. at doGet() action : " + action);
