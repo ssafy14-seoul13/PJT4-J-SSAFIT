@@ -53,7 +53,7 @@ public class VideoServiceImpl implements VideoService {
 		// length = youTubeApi()
 		
 		String id = IdGenerator.newId();
-		LocalDateTime createdAt = LocalDateTime.now();
+		String createdAt = LocalDateTime.now().toString();
 		Video video = new Video(id, title, channelName, author, part, url, length, createdAt);
 		
 		boolean succes = videoRepository.add(video);
@@ -72,7 +72,7 @@ public class VideoServiceImpl implements VideoService {
 		origin.setChannelName(channelName);
 		origin.setPart(part);
 		origin.setUrl(url);
-		origin.setUpdatedAt(LocalDateTime.now());
+		origin.setUpdatedAt(LocalDateTime.now().toString());
 		
 		return videoRepository.update(origin);
 	}
