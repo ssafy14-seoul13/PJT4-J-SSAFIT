@@ -8,28 +8,28 @@
   	<finalName>ssafit</finalName>
     <plugins>
       <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.2.3</version>
+      </plugin>
+      <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version>
         <configuration>
           <release>17</release>
         </configuration>
       </plugin>
-      <plugin>
-        <artifactId>maven-war-plugin</artifactId>
-        <version>3.2.3</version>
-      </plugin>
     </plugins>
   </build>
   
   <dependencies>
-	<!-- servlet -->
+
+      <!-- JSTL API -->
     <dependency>
-        <groupId>jakarta.servlet</groupId>
-        <artifactId>jakarta.servlet-api</artifactId>
-        <version>6.0.0</version>
-        <scope>provided</scope>
+    	<groupId>jakarta.servlet.jsp.jstl</groupId>
+    	<artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+    	<version>3.0.0</version>
     </dependency>
-    <!-- jstl -->
+
     <!-- jstl 구현체-->
     <dependency>
   		<groupId>org.glassfish.web</groupId>
