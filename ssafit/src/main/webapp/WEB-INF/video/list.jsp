@@ -21,7 +21,7 @@
       <button type="submit">검색</button>
     </form>
 
-    <a href="${cpath}/video?action=create">새 영상 등록</a>
+    <a href="${cpath}/video?action=createForm">새 영상 등록</a>
   </div>
 
   <c:choose>
@@ -49,7 +49,7 @@
               <td><c:out value="${v.id}"/></td>
 
               <td>
-                <a href="${cpath}/video?action=get&id=${v.id}">
+                <a href="${cpath}/video?action=view&id=${v.id}">
                   <c:out value="${v.title}"/>
                 </a>
               </td>
@@ -64,7 +64,7 @@
               <td><c:out value="${v.updatedAt}"/></td>
 
               <td class="actions">
-                <a href="${cpath}/video?action=editForm&id=${v.id}">수정</a>
+                <a href="${cpath}/video?action=updateForm&id=${v.id}">수정</a>
 
                 <form method="post" action="${cpath}/video" style="display:inline" onsubmit="return confirm('삭제할까요?');">
                   <input type="hidden" name="action" value="delete"/>
