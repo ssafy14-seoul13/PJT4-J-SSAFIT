@@ -48,11 +48,11 @@
 <div class="wrap">
   <h1>영상 등록</h1>
 
-  <c:if test="${empty sessionScope.userUID}">
+  <c:if test="${empty sessionScope.loggedInUser}">
     <div class="warn">로그인 후 등록 가능합니다.</div>
   </c:if>
 
-  <form id="createForm" action="<%=ctx%>/video?action=create" method="post" class="<c:out value='${empty sessionScope.userUID ? "disabled" : ""}'/>">
+  <form id="createForm" action="<%=ctx%>/video?action=create" method="post" class="<c:out value='${empty sessionScope.loggedInUser ? "disabled" : ""}'/>">
     <!-- 컨트롤러에서 author는 세션 userUID로 읽으므로 폼에는 넣지 않음 -->
 
     <label for="title">제목</label>
@@ -77,7 +77,7 @@
     <div class="hint">가능하면 <code>https://www.youtube.com/embed/VIDEO_ID</code> 형식으로 입력하세요.</div>
 
     <div class="actions">
-      <button type="submit" class="<c:out value='${empty sessionScope.userUID ? "disabled" : ""}'/>">등록</button>
+      <button type="submit" class="<c:out value='${empty sessionScope.loggedInUser ? "disabled" : ""}'/>">등록</button>
       <a class="linkbtn secondary" href="<%=ctx%>/video?action=list">목록</a>
     </div>
   </form>
