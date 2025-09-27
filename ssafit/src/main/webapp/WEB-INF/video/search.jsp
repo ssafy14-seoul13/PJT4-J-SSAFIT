@@ -46,7 +46,7 @@
         <c:forEach var="v" items="${videos}">
           <tr>
             <td>
-              <a href="<%=ctx%>/video?action=get&id=<c:out value='${v.id}'/>">
+              <a href="<%=ctx%>/video?action=view&id=<c:out value='${v.id}'/>">
                 <c:out value="${v.title}"/>
               </a>
             </td>

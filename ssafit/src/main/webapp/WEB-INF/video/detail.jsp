@@ -36,7 +36,7 @@
   <div class="actions" style="margin-top:12px;">
     <a href="<%=ctx%>/video?action=list">목록</a>
     <!-- 수정/삭제는 컨트롤러 권한 검사 통과 시에만 성공 -->
-    <a href="<%=ctx%>/video?action=update&id=<c:out value='${video.id}'/>">수정</a>
+    <a href="<%=ctx%>/video?action=updateForm&id=<c:out value='${video.id}'/>">수정</a>
 
     <form action="<%=ctx%>/video?action=delete" method="post" style="display:inline;" onsubmit="return confirm('정말 삭제할까요?');">
       <input type="hidden" name="id" value="<c:out value='${video.id}'/>"/>
