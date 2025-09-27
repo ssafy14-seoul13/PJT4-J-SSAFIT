@@ -5,6 +5,7 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
   <build>
+  	<finalName>ssafit</finalName>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -29,20 +30,21 @@
         <scope>provided</scope>
     </dependency>
     <!-- jstl -->
+    <!-- jstl 구현체-->
     <dependency>
-        <groupId>jakarta.servlet.jsp.jstl</groupId>
-        <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
-        <version>3.0.0</version>
-    </dependency>
-    
-    <!-- EL API는 컴파일만, 배포엔 미포함 -->
+  		<groupId>org.glassfish.web</groupId>
+  		<artifactId>jakarta.servlet.jsp.jstl</artifactId>
+  		<version>3.0.1</version>
+	</dependency>
+
+	<!-- EL API는 컴파일만, 배포엔 미포함 -->
 	<dependency>
 	  <groupId>jakarta.el</groupId>
 	  <artifactId>jakarta.el-api</artifactId>
 	  <version>5.0.0</version>
 	  <scope>provided</scope>
 	</dependency>
-	
+
 	<!-- Gson -->
 	<dependency>
 	  <groupId>com.google.code.gson</groupId>
