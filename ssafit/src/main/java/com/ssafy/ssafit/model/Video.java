@@ -1,7 +1,6 @@
 package com.ssafy.ssafit.model;
 
 
-import java.time.LocalDateTime;
 
 import com.ssafy.ssafit.util.IdGenerator;
 
@@ -14,12 +13,12 @@ public class Video {
 	private String url;				// 유튜브 영상 링크
 	private int length;				// 영상 길이 (초)
 	
-	private LocalDateTime createdAt;	// 생성 시간	
-	private LocalDateTime updatedAt;// 수정 시간
+	private String createdAt;	// 생성 시간	
+	private String updatedAt;// 수정 시간
 	
 	private int viewCount;			// 조회수
 
-	public Video(String id, String title, String channelName, String author, String part, String url, int length, LocalDateTime createdAt) {
+	public Video(String id, String title, String channelName, String author, String part, String url, int length, String createdAt) {
 		this.id = id;
 		this.title = title;
 		this.channelName = channelName;
@@ -92,19 +91,19 @@ public class Video {
 		this.length = length;
 	}
 
-	public LocalDateTime getCreateAt() {
+	public String getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(LocalDateTime createdAt) {
+	public void setCreatedAt(String createdAt) {
 		this.createdAt = createdAt;
 	}
 
-	public LocalDateTime getUpdatedAt() {
+	public String getUpdatedAt() {
 		return updatedAt;
 	}
 
-	public void setUpdatedAt(LocalDateTime updatedAt) {
+	public void setUpdatedAt(String updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 	
