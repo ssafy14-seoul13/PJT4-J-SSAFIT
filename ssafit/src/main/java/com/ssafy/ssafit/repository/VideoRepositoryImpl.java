@@ -22,7 +22,8 @@ import com.ssafy.ssafit.model.Video;
  */
 public class VideoRepositoryImpl implements VideoRepository {
 
-    private static final String CLASSPATH_JSON = "data/dev/video.json";
+//    private static final String CLASSPATH_JSON = "data/dev/video.json";
+    private static final String CLASSPATH_JSON = "data/video.json";
     
 	// 메모리 내 영상 저장소
 	Map<String, Video> videos = new HashMap<>();
