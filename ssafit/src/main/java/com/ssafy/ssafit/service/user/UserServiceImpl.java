@@ -84,9 +84,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User deleteUser() {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean deleteUser(String userId) {
+		return userRepository.deleteUser(userId);
 	}
 
 

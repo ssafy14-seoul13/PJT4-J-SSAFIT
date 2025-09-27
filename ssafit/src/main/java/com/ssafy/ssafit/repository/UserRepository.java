@@ -26,6 +26,7 @@ public interface UserRepository {
 	
 	// 8. 사용자 이메일만 수정
 	abstract boolean updateEmail(String userId, String newEmail);
-	// 3. 사용자 삭제
-	abstract User deleteUser();
+	
+	// 9. 사용자 삭제
+	abstract boolean deleteUser(String userId);
 }

@@ -91,9 +91,16 @@ public class UserRepositoryImpl implements UserRepository{
 	}
 	
 	@Override
-	public User deleteUser() {
-		// TODO Auto-generated method stub
-		return null;
+	// 10. 사용자 삭제
+	public boolean deleteUser(String userId) {
+		// 10-a. 사용자 찾기
+		User user = searchByUserId(userId);
+		// 10-b. 사용자가 존재할 경우 -> 제거
+		if (user != null) {
+			userList.remove(user);
+			return true;
+		}
+		return false;
 	}
 
 }

@@ -21,6 +21,6 @@ public interface UserService {
 	// 5. 사용자 이메일 수정
 	abstract boolean updateEmail(String userId, String newEmail);
 	
-	// 4. 사용자 정보 삭제 (마이페이지)
-	abstract User deleteUser();
+	// 6. 사용자 정보 삭제 (마이페이지)
+	abstract boolean deleteUser(String userId);
 }
