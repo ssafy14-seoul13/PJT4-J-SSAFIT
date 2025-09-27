@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import com.google.gson.Gson;
+import com.ssafy.ssafit.model.User;
 import com.ssafy.ssafit.model.Video;
 import com.ssafy.ssafit.service.video.VideoService;
 import com.ssafy.ssafit.service.video.VideoServiceImpl;
@@ -50,8 +51,7 @@ public class VideoController extends HttpServlet {
 			break;
 			
 		case "updateForm":
-			// TODO 권한 있는 사용자여야 페이지 받도록
-		    request.getRequestDispatcher("/WEB-INF/video/update.jsp").forward(request, response);
+			handleUpdateForm(request, response);
 		    break;
 
 		default:
@@ -179,31 +179,67 @@ public class VideoController extends HttpServlet {
 		request.setAttribute("videos", videos);
 		request.getRequestDispatcher("/WEB-INF/video/search.jsp").forward(request, response);
 	}
+	
 
-	private void handleCreate(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	private void handleUpdateForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO 권한 있는 사용자여야 페이지 받도록
+		String id = request.getParameter("id");
+	    if (id == null || id.isBlank()) {
+	        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+	        request.setAttribute("message", "id 파라미터가 없습니다.");
+	        request.getRequestDispatcher("/WEB-INF/error/404.jsp").forward(request, response);
+	        return;
+	    }
+	    Video v = service.getVideoById(id);
+	    if (v == null) {
+	        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+	        request.setAttribute("message", "해당 영상이 존재하지 않습니다: id=" + id);
+	        request.getRequestDispatcher("/WEB-INF/error/404.jsp").forward(request, response);
+	        return;
+	    }
+	    request.setAttribute("video", v);
+	    request.getRequestDispatcher("/WEB-INF/video/update.jsp").forward(request, response);
+	    return;
+	}
+
+
+	private void handleCreate(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		HttpSession session = request.getSession();
-
+		
+		if (session.getAttribute("loggedInUser") == null) {
+			System.out.println("Issue! handleCreate(): 미 로그인 사용자 create 요청");
+			
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+			request.setAttribute("message", "권한 없음");
+			request.getRequestDispatcher("/WEB-INF/error/403.jsp").forward(request, response);
+			return;
+		}
+		
+		User loggedInUser = (User) session.getAttribute("loggedInUser");
+		
 		String title = request.getParameter("title");
 		String channelName = request.getParameter("channelName");
-		String author = (String) session.getAttribute("userUID");
+		String author = loggedInUser.getId();
 		String part = request.getParameter("part");
 		String url = request.getParameter("url");
 
 		String id = service.createVideo(title, channelName, author, part, url);
-		response.sendRedirect(request.getContextPath() + "/video?action=get&id=" + id);
+		response.sendRedirect(request.getContextPath() + "/video?action=view&id=" + id);
 	}
 
 	private void handleUpdate(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		HttpSession session = request.getSession();
 
 		String id = request.getParameter("id");
+		System.out.println("id" + id);
 		String title = request.getParameter("title");
 		String channelName = request.getParameter("channelName");
 //		String author = request.getParameter("userUID");
 		String part = request.getParameter("part");
 		String url = request.getParameter("url");
-
-		String userUID = (String) session.getAttribute("userUID");
+		
+		User loggedInUser = (User) session.getAttribute("loggedInUser");
+		String userUID = loggedInUser.getId();
 		
 		Video origin = service.getVideoById(id);
 		
@@ -228,7 +264,8 @@ public class VideoController extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		String id = request.getParameter("id");
-		String userUID = (String) session.getAttribute("userUID");
+		User loggedInUser = (User) session.getAttribute("loggedInUser");
+		String userUID = loggedInUser.getId();
 		
 		Video origin = service.getVideoById(id);
 		
