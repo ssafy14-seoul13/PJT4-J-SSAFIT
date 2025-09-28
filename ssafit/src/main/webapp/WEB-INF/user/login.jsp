@@ -37,7 +37,7 @@ footer{text-align:center;color:var(--muted);padding:24px}
 			<input type="submit" value="로그인">
 		</form>
 		<div class="bottom-link">
-			<a href="./">메인으로 →</a>
+			<a href="./">메인으로</a>
 		</div>
 		</section>
 	</main>
