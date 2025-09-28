@@ -5,7 +5,12 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
   <build>
+  	<finalName>ssafit</finalName>
     <plugins>
+      <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.2.3</version>
+      </plugin>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version>
@@ -13,34 +18,38 @@
           <release>17</release>
         </configuration>
       </plugin>
-      <plugin>
-        <artifactId>maven-war-plugin</artifactId>
-        <version>3.2.3</version>
-      </plugin>
     </plugins>
   </build>
   
   <dependencies>
-	<!-- servlet -->
+
+      <!-- JSTL API -->
     <dependency>
-        <groupId>jakarta.servlet</groupId>
-        <artifactId>jakarta.servlet-api</artifactId>
-        <version>6.0.0</version>
-        <scope>provided</scope>
+    	<groupId>jakarta.servlet.jsp.jstl</groupId>
+    	<artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+    	<version>3.0.0</version>
     </dependency>
-    <!-- jstl -->
+
+    <!-- jstl 구현체-->
     <dependency>
-        <groupId>jakarta.servlet.jsp.jstl</groupId>
-        <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
-        <version>3.0.0</version>
-    </dependency>
-    
-    <!-- EL API는 컴파일만, 배포엔 미포함 -->
+  		<groupId>org.glassfish.web</groupId>
+  		<artifactId>jakarta.servlet.jsp.jstl</artifactId>
+  		<version>3.0.1</version>
+	</dependency>
+
+	<!-- EL API는 컴파일만, 배포엔 미포함 -->
 	<dependency>
 	  <groupId>jakarta.el</groupId>
 	  <artifactId>jakarta.el-api</artifactId>
 	  <version>5.0.0</version>
 	  <scope>provided</scope>
+	</dependency>
+
+	<!-- Gson -->
+	<dependency>
+	  <groupId>com.google.code.gson</groupId>
+	  <artifactId>gson</artifactId>
+	  <version>2.11.0</version>
 	</dependency>
 	
   </dependencies>

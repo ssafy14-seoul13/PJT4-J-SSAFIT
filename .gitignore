@@ -5,6 +5,9 @@ Thumbs.db
 # --- Server ---
 **/Servers/
 
+# --- data ---
+**/data/dev
+
 # --- Maven/빌드 산출물 ---
 **/target/
 **/out/
