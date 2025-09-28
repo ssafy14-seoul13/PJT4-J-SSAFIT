@@ -1,11 +1,11 @@
-package com.ssafy.ssafit.service.review;
+package com.ssafy.ssafit.repository;
 
 import java.util.List;
 
 import com.ssafy.ssafit.model.Review;
 
-public interface ReviewService {
-	// 1. 리뷰 등록
+public interface ReviewRepository {
+	// 1. 리뷰 추가
 	abstract Review addReview(String userId, String name, String videoId, String content);
 	
 	// 2. 리뷰 조회 (영상별)
@@ -14,7 +14,7 @@ public interface ReviewService {
 	// 3. 리뷰 조회 (사용자별)
 	abstract List<Review> searchByUserId(String userId);
 	
-	// 4. 개별 리뷰 조회
+	// 4. 리뷰 개별 조회
 	abstract Review getReview(String id);
 	
 	// 5. 리뷰 수정
