@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 public class UserController {
-	private final UserService userService = new UserServiceImpl(new UserRepositoryImpl());
+	private final UserService userService = new UserServiceImpl(UserRepositoryImpl.getInstance());
 	
 	public UserController() {
 		super();

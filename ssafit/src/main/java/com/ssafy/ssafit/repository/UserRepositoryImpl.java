@@ -9,7 +9,13 @@ import java.util.Map;
 import com.ssafy.ssafit.model.User;
 
 public class UserRepositoryImpl implements UserRepository{
+	private static UserRepositoryImpl instance = new UserRepositoryImpl();
 
+    private UserRepositoryImpl() {}
+
+    public static UserRepositoryImpl getInstance() {
+        return instance;
+    }
 	// 사용자를 저장할 저장소
 	private static final Map<String, User> userMap = new HashMap<>();
 	

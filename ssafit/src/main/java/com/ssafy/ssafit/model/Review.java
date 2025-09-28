@@ -8,6 +8,7 @@ public class Review {
 	// 변수
 	private String id;
 	private String userId;
+	private String name;
 	private String videoId;
 	private String content;
 	private Date date;
@@ -17,9 +18,10 @@ public class Review {
 	}
 	
 	// 생성자
-	public Review(String userId, String videoId, String content) {
+	public Review(String userId, String name, String videoId, String content) {
 		this.id = IdGenerator.newId(); // 등록 시, 새로운 리뷰 id 부여
 		this.userId = userId;
+		this.name = name;
 		this.videoId = videoId;
 		this.content = content;
 		this.date = new Date();
@@ -36,8 +38,15 @@ public class Review {
 	public String getUserId() {
 		return userId;
 	}
-	public void serUserId(String userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	public String getVideoId() {

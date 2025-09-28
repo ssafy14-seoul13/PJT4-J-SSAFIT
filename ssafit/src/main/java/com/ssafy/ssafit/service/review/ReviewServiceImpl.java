@@ -15,8 +15,8 @@ public class ReviewServiceImpl implements ReviewService{
 	
 	@Override
 	// 1. 리뷰 등록
-	public Review addReview(String videoId, String userId, String content) {
-		return reviewRepository.addReview(userId, videoId, content);
+	public Review addReview(String userId, String name, String videoId, String content) {
+		return reviewRepository.addReview(userId, name, videoId, content);
 	}
 
 	@Override

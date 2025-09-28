@@ -4,9 +4,13 @@ import java.io.IOException;
 import java.util.List;
 
 import com.google.gson.Gson;
+import com.ssafy.ssafit.model.Review;
 import com.ssafy.ssafit.model.User;
 import com.ssafy.ssafit.model.Video;
+import com.ssafy.ssafit.repository.ReviewRepositoryImpl;
+import com.ssafy.ssafit.service.review.ReviewServiceImpl;
 import com.ssafy.ssafit.service.video.VideoService;
+import com.ssafy.ssafit.service.review.ReviewService;
 import com.ssafy.ssafit.service.video.VideoServiceImpl;
 
 import jakarta.servlet.ServletException;
@@ -22,6 +26,7 @@ public class VideoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private final VideoService service = new VideoServiceImpl();
+	ReviewService reviewService = new ReviewServiceImpl(ReviewRepositoryImpl.getInstance());
 	private final Gson gson = new Gson();
 
 	@Override
@@ -163,6 +168,10 @@ public class VideoController extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/error/404.jsp").forward(request, response);
 			return;
 		}
+		
+		System.out.println(id);
+		List<Review> reviews = reviewService.searchByVideoId(id);
+	    request.setAttribute("reviews", reviews);
 
 		request.setAttribute("video", video);
 		request.getRequestDispatcher("/WEB-INF/video/detail.jsp").forward(request, response);

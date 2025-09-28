@@ -6,7 +6,7 @@ import com.ssafy.ssafit.model.Review;
 
 public interface ReviewRepository {
 	// 1. 리뷰 추가
-	abstract Review addReview(String userId, String videoId, String content);
+	abstract Review addReview(String userId, String name, String videoId, String content);
 	
 	// 2. 리뷰 조회 (영상별)
 	abstract List<Review> searchByVideoId(String videoId);
