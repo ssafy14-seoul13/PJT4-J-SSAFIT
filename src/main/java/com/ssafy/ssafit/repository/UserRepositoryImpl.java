@@ -84,7 +84,7 @@ public class UserRepositoryImpl implements UserRepository{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs= null;
-		String sql = "SELECT * FROM board WHERE user_id = ? AND user_pwd = ?";
+		String sql = "SELECT * FROM user WHERE user_id = ? AND user_pwd = ?";
 		User user = null;
 		
 		try {
