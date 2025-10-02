@@ -18,6 +18,8 @@ public class Video {
 	
 	private int viewCount;			// 조회수
 
+	public Video() {};
+	
 	public Video(String id, String title, String channelName, String author, String part, String url, int length, String createdAt) {
 		this.id = id;
 		this.title = title;

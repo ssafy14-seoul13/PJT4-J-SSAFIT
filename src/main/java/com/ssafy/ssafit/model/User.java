@@ -11,7 +11,7 @@ public class User {
 	private String email;
 	
 	// 기본 생성자
-	private User() {
+	public User() {
 	}
 	
 	// 생성자

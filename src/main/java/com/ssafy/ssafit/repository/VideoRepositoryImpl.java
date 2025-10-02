@@ -1,17 +1,14 @@
 package com.ssafy.ssafit.repository;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.ssafy.ssafit.model.Video;
+import com.ssafy.ssafit.util.DBUtil;
 
 /**
  * VideoRepository 구현체.
@@ -21,58 +18,56 @@ import com.ssafy.ssafit.model.Video;
  * 저장한다.
  */
 public class VideoRepositoryImpl implements VideoRepository {
-
-//    private static final String CLASSPATH_JSON = "data/dev/video.json";
-    private static final String CLASSPATH_JSON = "data/video.json";
-    
-	// 메모리 내 영상 저장소
-	Map<String, Video> videos = new HashMap<>();
-
-	private final Gson gson = new Gson();
-
-	public VideoRepositoryImpl() {
-		List<Video> list = loadVideos();
-		for (Video video : list) {
-			videos.put(video.getId(), video);
-		}
-
-		Runtime.getRuntime().addShutdownHook(new Thread(this::saveVideos));
+	
+	private static DBUtil util = DBUtil.getInstance();
+	
+	private static VideoRepository repo = new VideoRepositoryImpl();
+	
+	private VideoRepositoryImpl() {
+		
+	}
+	
+	public static VideoRepository getInstance() {
+		return repo;
 	}
 
-	/**
-	 * JSON 파일에서 영상 목록을 로드한다. 파일이 없거나 읽기 실패 시 빈 리스트 반환.
-	 * 
-	 */
-	private List<Video> loadVideos() {
-	    try (var in = getClass().getClassLoader().getResourceAsStream(CLASSPATH_JSON)) {
-	        if (in == null) {
-	            System.out.println("클래스패스 리소스를 찾을 수 없음: " + CLASSPATH_JSON);
-	            return new ArrayList<>();
-	        }
-	        try (var reader = new java.io.InputStreamReader(in, java.nio.charset.StandardCharsets.UTF_8)) {
-	            return gson.fromJson(reader, new com.google.gson.reflect.TypeToken<List<Video>>() {}.getType());
-	        }
-	    } catch (Exception e) {
-	        System.out.println("exception : loadVideos 실패! " + e.getMessage());
-	        return new ArrayList<>();
-	    }
-	}
-
-	/**
-	 * 현재 메모리에 있는 영상 데이터를 JSON 파일로 저장한다.
-	 */
-	private void saveVideos() {
-	    //TODO 클래스패스라서 쓰기가 불가능함...
-	    System.out.println("saveVideos 호출됨 (무시됨: 클래스패스 리소스는 쓰기 불가)");
-	}
 
 	/**
 	 * 모든 영상 목록 조회
 	 */
 	@Override
 	public List<Video> findAll() {
-
-		return new ArrayList<>(videos.values());
+		List<Video> list = new ArrayList<>();
+		String sql = "SELECT * FROM video";
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = util.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				Video video = new Video();
+				video.setId(rs.getString("id"));
+				video.setTitle(rs.getString("title"));
+				video.setChannelName(rs.getString("channel_name"));
+				video.setAuthor(rs.getString("author"));
+				video.setUrl(rs.getString("url"));
+				video.setLength(rs.getInt("length"));
+				video.setCreatedAt(rs.getString("created_at"));
+				video.setUpdatedAt(rs.getString("updated_at"));
+				video.setViewCount(rs.getInt("view_cnt"));
+				list.add(video);
+			}	
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			util.close(conn);
+		}
+		return list;
 	}
 
 	/**
@@ -83,7 +78,8 @@ public class VideoRepositoryImpl implements VideoRepository {
 	@Override
 	public Video findById(String id) {
 
-		return videos.get(id);
+//		return videos.get(id);
+		return null;
 	}
 
 	/**
@@ -94,7 +90,8 @@ public class VideoRepositoryImpl implements VideoRepository {
 	@Override
 	public boolean add(Video video) {
 
-		return videos.putIfAbsent(video.getId(), video) == null;
+//		return videos.putIfAbsent(video.getId(), video) == null;
+		return false;
 	}
 
 	/**
@@ -105,7 +102,8 @@ public class VideoRepositoryImpl implements VideoRepository {
 	@Override
 	public boolean update(Video video) {
 
-		return videos.replace(video.getId(), video) != null;
+//		return videos.replace(video.getId(), video) != null;
+		return false;
 	}
 
 	/**
@@ -116,7 +114,8 @@ public class VideoRepositoryImpl implements VideoRepository {
 	@Override
 	public boolean deleteById(String id) {
 
-		return videos.remove(id) != null;
+//		return videos.remove(id) != null;
+		return false;
 	}
 
 }
