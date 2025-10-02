@@ -14,7 +14,7 @@ public class VideoServiceImpl implements VideoService {
 	private final VideoRepository videoRepository;
 
 	public VideoServiceImpl() {
-		this.videoRepository = new VideoRepositoryImpl();
+		this.videoRepository = VideoRepositoryImpl.getInstance();
 	}
 
 	@Override
