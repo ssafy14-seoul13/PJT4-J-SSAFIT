@@ -1,8 +1,5 @@
 package com.ssafy.ssafit.repository;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -10,23 +7,18 @@ import java.util.List;
 import java.util.Map;
 
 import com.ssafy.ssafit.model.User;
-import com.ssafy.ssafit.util.DBUtil;
 
 public class UserRepositoryImpl implements UserRepository{
-	
-	// DB 연결하기 위한 세팅
-	private DBUtil util = DBUtil.getInstance();
-	///////////////////////////////////////////////////////////////
 	private static UserRepositoryImpl instance = new UserRepositoryImpl();
-
 
     private UserRepositoryImpl() {}
 
     public static UserRepositoryImpl getInstance() {
         return instance;
     }
-    ////////////////////////////////////////////////////////////////////
-
+	// 사용자를 저장할 저장소
+	private static final Map<String, User> userMap = new HashMap<>();
+	
 	@Override
 	// 1. 사용자 추가
 	public User addUser(User user) {
@@ -42,11 +34,8 @@ public class UserRepositoryImpl implements UserRepository{
 	@Override
 	// 2. 등록된 모든 사용자 정보 반환
 	public User[] getUserList() {
-		List<User> list = new ArrayList<>();
-		String sql = "SELECT * FROM board";
-		Connection conn = null;
-		Statement stmt = null;
-		ResultSet rs = null;
+		Collection<User> values = userMap.values();
+        return values.toArray(new User[0]);
 	}
 	
 	@Override
